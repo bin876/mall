@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="code-generator" />
+        <module name="mall-api-order" />
+        <module name="mall-auth" />
+        <module name="mall-api-seckill" />
+        <module name="mall-common" />
+        <module name="mall-api-product" />
+        <module name="mall-api-file" />
+        <module name="mall-seckill" />
+        <module name="mall-admin" />
+        <module name="mall-api-admin" />
+        <module name="mall-api-member" />
+        <module name="mall-order" />
+        <module name="mall-product" />
+        <module name="mall-file" />
+        <module name="mall-gateway" />
+        <module name="mall-member" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="code-generator" options="-parameters" />
+      <module name="mall" options="-parameters" />
+      <module name="mall-admin" options="-parameters" />
+      <module name="mall-api" options="-parameters" />
+      <module name="mall-api-admin" options="-parameters" />
+      <module name="mall-api-file" options="-parameters" />
+      <module name="mall-api-member" options="-parameters" />
+      <module name="mall-api-order" options="-parameters" />
+      <module name="mall-api-product" options="-parameters" />
+      <module name="mall-api-seckill" options="-parameters" />
+      <module name="mall-auth" options="-parameters" />
+      <module name="mall-common" options="-parameters" />
+      <module name="mall-file" options="-parameters" />
+      <module name="mall-gateway" options="-parameters" />
+      <module name="mall-member" options="-parameters" />
+      <module name="mall-order" options="-parameters" />
+      <module name="mall-product" options="-parameters" />
+      <module name="mall-seckill" options="-parameters" />
+    </option>
+  </component>
+</project>

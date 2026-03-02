@@ -1,0 +1,7 @@
+.el-tooltip__trigger:focus-visible {
+  outline: unset;
+}
+
+.el-tooltip__trigger:first-child:focus-visible {
+  outline: unset;
+}

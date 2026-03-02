@@ -1,0 +1,10 @@
+package com.hbin.mall.product.mapper;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.hbin.mall.product.domain.SpuAttrValue;
+import org.apache.ibatis.annotations.Mapper;
+
+@Mapper
+public interface SpuAttrValueMapper extends BaseMapper<SpuAttrValue> {
+
+}

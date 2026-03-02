@@ -1,0 +1,9 @@
+com\hbin\mall\api\member\dto\MemberQueryDTO.class
+com\hbin\mall\api\member\dto\MemberAddressDTO.class
+com\hbin\mall\api\member\dto\UpdateMemberDTO.class
+com\hbin\mall\api\member\feign\MemberFeignClient.class
+com\hbin\mall\api\member\dto\MemberLoginRequest.class
+com\hbin\mall\api\member\dto\ResetPasswordDTO.class
+com\hbin\mall\api\member\dto\MemberDetailDTO.class
+com\hbin\mall\api\member\dto\UpdateMemberStatusDTO.class
+com\hbin\mall\api\member\dto\MemberDTO.class

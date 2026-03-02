@@ -1,0 +1,155 @@
+server:
+  port: 8040
+
+spring:
+  application:
+    name: mall-product
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.72.130:8848,192.168.72.134:8848,192.168.72.136:8848
+    sentinel:
+      transport:
+        dashboard: 192.168.72.130:8080
+        port: 8719
+#      datasource:
+#        ds1:
+#          nacos:
+#            server-addr: 192.168.72.130:8848
+#            group-id: DEFAULT_GROUP
+#            data-id: sentinel-mall-product
+#            rule-type: flow
+#            data-type: json
+
+  boot:
+    admin:
+      client:
+        url: http://192.168.72.130:8081
+        instance:
+          service-base-url: http://192.168.72.130:8040
+
+  datasource:
+    url: jdbc:mysql://192.168.72.130:3306/mall_product?useSSL=false&serverTimezone=UTC&characterEncoding=utf8
+    username: 'dbadmin'
+    password: '123456'
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    dynamic:
+      primary: master
+      strict: false
+      datasource:
+        master:
+          url: jdbc:mysql://192.168.72.134:3306/mall_product?useSSL=false&serverTimezone=UTC&characterEncoding=utf8
+          username: 'dbadmin'
+          password: '123456'
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          type: com.alibaba.druid.pool.DruidDataSource
+        slave:
+          url: jdbc:mysql://192.168.72.134:3306/mall_product?useSSL=false&serverTimezone=UTC&characterEncoding=utf8
+          username: 'dbadmin'
+          password: '123456'
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          type: com.alibaba.druid.pool.DruidDataSource
+
+#  data:
+#    redis:
+#      host: 192.168.72.130
+#      port: 6379
+#      timeout: 2000ms
+#      lettuce:
+#        pool:
+#          max-active: 8
+#          max-idle: 8
+#          min-idle: 0
+#          max-wait: -1ms
+#      password: 123456
+
+  data:
+    redis:
+      sentinel:
+        master: mymaster
+        nodes:
+          - 192.168.72.130:26379
+          - 192.168.72.134:26379
+          - 192.168.72.136:26379
+      password: '123456'
+
+  rabbitmq:
+    host: 192.168.72.130
+    port: 5672
+    username: admin
+    password: admin
+    virtual-host: /
+    publisher-confirm-type: correlated
+    publisher-returns: true
+    template:
+      mandatory: true
+    listener:
+      simple:
+        acknowledge-mode: manual
+        concurrency: 3
+        max-concurrency: 10
+
+  elasticsearch:
+    uris: http://192.168.72.130:9200
+    username: elastic
+    password: '+GNGCsB667UzepZMdeus'
+    webclient:
+      ssl:
+        verify: false
+
+
+sa-token:
+  token-name: Authorization
+  timeout: 86400
+  active-timeout: -1
+  is-concurrent: false
+  is-share: false
+  token-style: uuid
+  is-read-cookie: false
+  jwt-secret-key: asdasdasifhueuiwyurfewbfjsdafjkqwerty
+  token-prefix: Bearer
+  is-log: true
+
+seata:
+  config:
+    type: nacos
+    nacos:
+      server-addr: 192.168.72.130:8848
+      group: SEATA_GROUP
+      data-id: seataServer.properties
+  registry:
+    type: nacos
+    nacos:
+      server-addr: 192.168.72.130:8848
+      group: SEATA_GROUP
+      cluster: default
+
+canal:
+  server:
+    host: 192.168.72.130
+    port: 11111
+    instance: example
+
+# 启用追踪
+management:
+  tracing:
+    enabled: true
+    sampling:
+      probability: 1
+
+  # Zipkin 配置
+  zipkin:
+    tracing:
+      endpoint: http://192.168.72.130:9411/api/v2/spans
+
+  # 暴露 Actuator 端点（可选）
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+logging:
+  level:
+    com.baomidou.dynamic.datasource: debug
+    org.springframework.jdbc.datasource: debug

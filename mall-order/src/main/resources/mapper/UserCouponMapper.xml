@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hbin.mall.mapper.UserCouponMapper">
+
+    <select id="selectList" resultType="com.hbin.mall.order.domain.UserCoupon">
+        SELECT uc.*,
+        ct.template_id as template_templateId,
+        ct.name as template_name,
+        ct.description as template_description,
+        ct.coupon_type as template_couponType,
+        ct.discount_amount as template_discountAmount,
+        ct.min_order_amount as template_minOrderAmount
+        FROM user_coupon uc
+        LEFT JOIN coupon_template ct ON uc.template_id = ct.template_id
+        WHERE uc.member_id = #{memberId}
+        <if test="status != null">
+            AND uc.status = #{status}
+        </if>
+        ORDER BY uc.receive_time DESC
+    </select>
+
+</mapper>

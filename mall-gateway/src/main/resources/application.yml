@@ -1,0 +1,114 @@
+server:
+  port: 8000
+spring:
+  application:
+    name: mall-gateway
+  main:
+    web-application-type: reactive
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.72.130:8848,192.168.72.134:8848,192.168.72.136:8848
+    sentinel:
+      transport:
+        dashboard: 192.168.72.130:8080
+        port: 8719
+
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: mall-admin-route
+          uri: lb://mall-admin
+          predicates:
+            - Path=/admin/**
+
+        - id: mall-auth-route
+          uri: lb://mall-auth
+          predicates:
+            - Path=/api/auth/**
+          filters:
+            - StripPrefix=1
+
+        - id: mall-member-route
+          uri: lb://mall-member
+          predicates:
+            - Path=/api/member/**
+          filters:
+            - StripPrefix=1
+
+        - id: mall-product-route
+          uri: lb://mall-product
+          predicates:
+            - Path=/api/product/**
+          filters:
+            - StripPrefix=1
+
+        - id: mall-order-route
+          uri: lb://mall-order
+          predicates:
+            - Path=/api/order/**, /api/cart/**, /api/pay/**, /api/coupon/**
+          filters:
+            - StripPrefix=1
+
+        - id: mall-seckill-route
+          uri: lb://mall-seckill
+          predicates:
+            - Path=/api/seckill/**
+          filters:
+            - StripPrefix=1
+
+  datasource:
+    url: jdbc:mysql://192.168.72.130:3306/mall_admin?useSSL=false&serverTimezone=UTC&characterEncoding=utf8
+    username: 'dbadmin'
+    password: '123456'
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    dynamic:
+      primary: master
+      strict: false
+      datasource:
+        master:
+          url: jdbc:mysql://192.168.72.134:3306/mall_admin?useSSL=false&serverTimezone=UTC&characterEncoding=utf8
+          username: 'dbadmin'
+          password: '123456'
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          type: com.alibaba.druid.pool.DruidDataSource
+        slave:
+          url: jdbc:mysql://192.168.72.134:3306/mall_admin?useSSL=false&serverTimezone=UTC&characterEncoding=utf8
+          username: 'dbadmin'
+          password: '123456'
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          type: com.alibaba.druid.pool.DruidDataSource
+
+  data:
+    redis:
+      sentinel:
+        master: mymaster
+        nodes:
+          - 192.168.72.130:26379
+          - 192.168.72.134:26379
+          - 192.168.72.136:26379
+      password: '123456'
+
+sa-token:
+  token-name: Authorization
+  timeout: 86400
+  active-timeout: -1
+  is-concurrent: false
+  is-share: false
+  token-style: uuid
+  is-read-cookie: false
+  jwt-secret-key: asdasdasifhueuiwyurfewbfjsdafjkqwerty
+  token-prefix: Bearer
+  is-log: true
+
+secure:
+  ignore:
+    urls:
+      - "/api/auth/login"
+      - "/api/auth/logout"
+      - "/api/member/register"
+      - "/api/product/**"

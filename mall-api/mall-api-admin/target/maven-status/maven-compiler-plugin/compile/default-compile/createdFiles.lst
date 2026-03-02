@@ -1,0 +1,2 @@
+com\hbin\mall\api\admin\dto\SysUserLoginRequest.class
+com\hbin\mall\api\admin\feign\SysUserApi.class

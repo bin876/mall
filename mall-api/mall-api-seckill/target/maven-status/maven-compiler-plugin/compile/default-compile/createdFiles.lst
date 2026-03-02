@@ -1,0 +1,11 @@
+com\hbin\mall\api\seckill\dto\SeckillSkuEditDTO$SaleAttrDTO.class
+com\hbin\mall\api\seckill\dto\SeckillSkuEditDTO.class
+com\hbin\mall\api\seckill\feign\SeckillFeignClient.class
+com\hbin\mall\api\seckill\dto\SeckillSkuDTO.class
+com\hbin\mall\api\seckill\dto\SeckillActivityUpdateRequest.class
+com\hbin\mall\api\seckill\dto\SeckillActivityEditDTO.class
+com\hbin\mall\api\seckill\dto\SeckillSkuCreateDTO.class
+com\hbin\mall\api\seckill\dto\SeckillSkuDTO$SaleAttrDTO.class
+com\hbin\mall\api\seckill\dto\SeckillActivityCreateRequest.class
+com\hbin\mall\api\seckill\dto\SeckillInfoDTO.class
+com\hbin\mall\api\seckill\dto\SeckillActivityDTO.class
